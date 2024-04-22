@@ -5,6 +5,7 @@ import { DeployAsset } from "../../../wailsjs/go/main/App";
 
 // contexts
 import { ConnectionsContext } from "../../contexts/ConnectionsContext";
+import { ZanoDetailsContext } from "../../contexts/ZanoDetailsContext";
 import { useContext, useState } from "react";
 
 type Inputs = {
@@ -19,6 +20,7 @@ type Inputs = {
 
 export const Deploy = () => {
   const { walletFile, walletPassword } = useContext(ConnectionsContext);
+  const { zanoAddress } = useContext(ZanoDetailsContext);
 
   const [imageFile, setImageFile] = useState("");
 
@@ -30,6 +32,7 @@ export const Deploy = () => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     DeployAsset(
+      zanoAddress,
       data.ticker,
       data.fullName,
       data.totalMaxSupply,
@@ -95,7 +98,10 @@ export const Deploy = () => {
             placeholder="100000000000000000"
             className="input input-bordered"
             // defaultValue="100000000000000000"
-            {...register("totalMaxSupply", { required: true })}
+            {...register("totalMaxSupply", {
+              required: true,
+              max: 18446744073709551615, // max value if uint64
+            })}
           />
           {errors.totalMaxSupply && (
             <span className="text-error">This field is required</span>

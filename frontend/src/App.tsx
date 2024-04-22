@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 // contexts
 import ConnectionsProvider from "./contexts/ConnectionsContext";
+import ZanoDetailsProvider from "./contexts/ZanoDetailsContext";
 
 // components
 import Layout from "./component/Layout/Layout";
@@ -14,13 +15,15 @@ import "./App.css";
 function App() {
   return (
     <ConnectionsProvider>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<IndexAssets />} />
-          <Route path="/manage" element={<IndexManage />} />
-          <Route path="/airdrop" element={<IndexAirdrop />} />
-        </Routes>
-      </Layout>
+      <ZanoDetailsProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<IndexAssets />} />
+            <Route path="/manage" element={<IndexManage />} />
+            <Route path="/airdrop" element={<IndexAirdrop />} />
+          </Routes>
+        </Layout>
+      </ZanoDetailsProvider>
     </ConnectionsProvider>
   );
 }

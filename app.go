@@ -101,26 +101,37 @@ func (a *App) DeployAsset(originAddress string, ticker string, fullName string, 
 
 	asset.JsonFile(ticker, fullName, ui64Max, ui64Cur, intDecimal, metaInfo)
 
-	fmt.Println(image)
 	err, stdoutSlice := asset.Deploy(wallet[12:], password)
 	if err != nil {
 		return false
 	}
 
+	//var assetId string
+
 	for _, msg := range stdoutSlice {
-		if strings.Contains(msg, "") {
+		if strings.Contains(msg, "Error") {
 			fmt.Println(msg)
+			return false
+		}
+
+		if strings.Contains(msg, "Asset ID:") {
+			//assetData := db.AssetQuery(fullName)
+
+			fmt.Println(msg)
+			trimmedAssetId := strings.TrimSpace(msg[9:])
+
+			assetCreated := db.Create(originAddress, ticker, fullName, trimmedAssetId, maxSupply, currentSupply, decimal, metaInfo, wallet, image)
+			if !assetCreated {
+				return false
+			}
+
+			return true
 		}
 	}
 
-	assetData := db.AssetQuery(fullName)
+	//assetData := db.AssetQuery(fullName)
 
-	assetCreated := db.Create(originAddress, ticker, fullName, assetData.AssetId, ui64Max, ui64Cur, intDecimal, metaInfo, wallet, image)
-	if !assetCreated {
-		return false
-	}
-
-	return true
+	return false
 }
 
 // EmitAsset returns a greeting for the given name
@@ -170,7 +181,12 @@ func (a *App) EditAsset(assetName string, metaInfo, walletFile string, walletPas
 
 	assetData := db.AssetQuery(assetName)
 
-	fmt.Println(assetData)
+	editStdout, err := asset.Edit(assetData.AssetId, metaInfo, walletFile, walletPassword)
+	if err != nil {
+		return false
+	}
+
+	fmt.Println(editStdout)
 
 	return true
 }

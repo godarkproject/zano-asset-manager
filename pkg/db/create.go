@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func Create(originAddress string, ticker string, fullName string, assetId string, maxSupply uint64, currentSupply uint64, decimal int, metaInfo string, wallet string, image string) bool {
+func Create(originAddress string, ticker string, fullName string, assetId string, maxSupply string, currentSupply string, decimal string, metaInfo string, wallet string, image string) bool {
 	db, err := gorm.Open(sqlite.Open("storage/zano_asset_manager.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
@@ -19,7 +19,7 @@ func Create(originAddress string, ticker string, fullName string, assetId string
 
 	newUuid := fmt.Sprintf("%s", uuid.New())
 	bazaar := initialize.Assets{
-		OwnerAddress:  originAddress,
+		OriginAddress: originAddress,
 		Ticker:        ticker,
 		FullName:      fullName,
 		AssetId:       assetId,
@@ -27,8 +27,8 @@ func Create(originAddress string, ticker string, fullName string, assetId string
 		CurrentSupply: currentSupply,
 		Decimal:       decimal,
 		MetaInfo:      metaInfo,
-		Image:         image,
-		WalletFile:    wallet,
+		Image:         image[12:],
+		WalletFile:    wallet[12:],
 		Uuid:          newUuid,
 	}
 

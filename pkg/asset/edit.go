@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func Edit(walletFile string, password string) (error, []string) {
+func Edit(assetId string, metaInfo string, walletFile string, password string) (error, []string) {
 	var stdoutSlice []string
 
 	cmd := exec.Command("binaries/simplewallet", "--wallet-file", fmt.Sprintf("wallets/%s", walletFile), "--password", password, "--daemon-address", "127.0.0.1:11211", "burn_asset", "tmp/asset.txt", "--no-password-confirmation")

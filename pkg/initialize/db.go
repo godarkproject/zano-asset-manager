@@ -6,13 +6,13 @@ import (
 )
 
 type Assets struct {
-	OwnerAddress  string `json:"owner"`
+	OriginAddress string `json:"owner"`
 	Ticker        string `json:"ticker"`
 	FullName      string `json:"full_name"`
 	AssetId       string `json:"asset_id"`
-	MaxSupply     uint64 `json:"max_supply"`
-	CurrentSupply uint64 `json:"current_supply"`
-	Decimal       int    `json:"decimal"`
+	MaxSupply     string `json:"max_supply"`
+	CurrentSupply string `json:"current_supply"`
+	Decimal       string `json:"decimal"`
 	MetaInfo      string `json:"meta_info"`
 	Image         string `json:"image"`
 	WalletFile    string `json:"wallet_file"`
