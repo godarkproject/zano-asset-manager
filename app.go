@@ -16,7 +16,8 @@ import (
 
 // App struct
 type App struct {
-	ctx context.Context
+	ctx        context.Context
+	stdoutPipe chan string
 }
 
 // NewApp creates a new App application struct
@@ -55,6 +56,11 @@ func (a *App) beforeClose(ctx context.Context) (prevent bool) {
 	}
 
 	return dialog != "Yes"
+}
+
+func (a *App) EmitPipe() {
+	msg := <-a.stdoutPipe
+	runtime.EventsEmit(a.ctx, "stdout", msg)
 }
 
 // LaunchWallet launches wallet in RPC mode
@@ -101,7 +107,7 @@ func (a *App) DeployAsset(originAddress string, ticker string, fullName string, 
 
 	asset.JsonFile(ticker, fullName, ui64Max, ui64Cur, intDecimal, metaInfo)
 
-	err, stdoutSlice := asset.Deploy(wallet[12:], password)
+	err, stdoutSlice := asset.Deploy(a.stdoutPipe, wallet[12:], password)
 	if err != nil {
 		return false
 	}
@@ -109,6 +115,7 @@ func (a *App) DeployAsset(originAddress string, ticker string, fullName string, 
 	//var assetId string
 
 	for _, msg := range stdoutSlice {
+		a.stdoutPipe <- msg
 		if strings.Contains(msg, "Error") {
 			fmt.Println(msg)
 			return false

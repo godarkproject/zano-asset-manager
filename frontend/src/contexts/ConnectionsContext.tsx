@@ -53,9 +53,9 @@ export const ConnectionsProvider = ({ children }: Props) => {
         });
       }
 
-      if (wallet) {
-        console.log(walletFile, walletPassword);
-      }
+      // if (wallet) {
+      //   console.log(walletFile, walletPassword);
+      // }
     }, 2000);
     return () => clearInterval(interval);
   });

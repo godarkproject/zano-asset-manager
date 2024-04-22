@@ -8,6 +8,10 @@ import { ConnectionsContext } from "../../contexts/ConnectionsContext";
 import { ZanoDetailsContext } from "../../contexts/ZanoDetailsContext";
 import { useContext, useState } from "react";
 
+// components
+// import { Tips } from "../Tips";
+import { Console } from "../Console";
+
 type Inputs = {
   ticker: string;
   fullName: string;
@@ -51,134 +55,146 @@ export const Deploy = () => {
   //   console.log(watch("ticker"));
 
   return (
-    <div className="card bg-base-100 mt-3 rounded-xl p-5">
-      <form
-        className="grid grid-cols-3 gap-5"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Ticker</span>
-          </label>
-          <input
-            type="text"
-            placeholder="RACKZ"
-            className="input input-bordered"
-            // defaultValue="$RACKZ"
-            {...register("ticker", { required: true })}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.ticker && (
-            <span className="text-error">This field is required</span>
-          )}
-        </div>
+    <div className="grid grid-rows-1 gap-3">
+      <div className="card bg-base-100 mt-3 rounded-xl p-5">
+        <form
+          className="grid grid-cols-3 gap-5"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Ticker</span>
+            </label>
+            <input
+              type="text"
+              placeholder="RACKZ"
+              className="input input-bordered"
+              // defaultValue="$RACKZ"
+              {...register("ticker", { required: true })}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.ticker && (
+              <span className="text-error">This field is required</span>
+            )}
+          </div>
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Full name</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Rackz"
-            className="input input-bordered"
-            // defaultValue="Rackz"
-            {...register("fullName", { required: true })}
-          />
-          {errors.fullName && (
-            <span className="text-error">This field is required</span>
-          )}
-        </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Full name</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Rackz"
+              className="input input-bordered"
+              // defaultValue="Rackz"
+              {...register("fullName", { required: true })}
+            />
+            {errors.fullName && (
+              <span className="text-error">This field is required</span>
+            )}
+          </div>
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Total max supply</span>
-          </label>
-          <input
-            type="number"
-            placeholder="100000000000000000"
-            className="input input-bordered"
-            // defaultValue="100000000000000000"
-            {...register("totalMaxSupply", {
-              required: true,
-              max: 18446744073709551615, // max value if uint64
-            })}
-          />
-          {errors.totalMaxSupply && (
-            <span className="text-error">This field is required</span>
-          )}
-        </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Total max supply</span>
+            </label>
+            <input
+              type="number"
+              placeholder="100000000000000000"
+              className="input input-bordered"
+              // defaultValue="100000000000000000"
+              {...register("totalMaxSupply", {
+                required: true,
+                max: 18446744073709551615, // max value if uint64
+              })}
+            />
+            {errors.totalMaxSupply && (
+              <span className="text-error">This field is required</span>
+            )}
+          </div>
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Current supply</span>
-          </label>
-          <input
-            type="number"
-            placeholder="1000000000000000"
-            className="input input-bordered"
-            // defaultValue="1000000000000000"
-            {...register("currentSupply", { required: true })}
-          />
-          {errors.currentSupply && (
-            <span className="text-error">This field is required</span>
-          )}
-        </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Current supply</span>
+            </label>
+            <input
+              type="number"
+              placeholder="1000000000000000"
+              className="input input-bordered"
+              // defaultValue="1000000000000000"
+              {...register("currentSupply", { required: true })}
+            />
+            {errors.currentSupply && (
+              <span className="text-error">This field is required</span>
+            )}
+          </div>
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Decimal point</span>
-          </label>
-          <input
-            type="number"
-            placeholder="12"
-            className="input input-bordered"
-            // defaultValue="12"
-            {...register("decimalPoint", { required: true })}
-          />
-          {errors.decimalPoint && (
-            <span className="text-error">This field is required</span>
-          )}
-        </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Decimal point</span>
+            </label>
+            <input
+              type="number"
+              placeholder="12"
+              className="input input-bordered"
+              // defaultValue="12"
+              {...register("decimalPoint", { required: true })}
+            />
+            {errors.decimalPoint && (
+              <span className="text-error">This field is required</span>
+            )}
+          </div>
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Meta info</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Raccoon powered, private money."
-            className="input input-bordered"
-            // defaultValue="Raccoon powered, private money."
-            {...register("metaInfo", { required: true })}
-          />
-          {errors.metaInfo && (
-            <span className="text-error">This field is required</span>
-          )}
-        </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Meta info</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Raccoon powered, private money."
+              className="input input-bordered"
+              // defaultValue="Raccoon powered, private money."
+              {...register("metaInfo", { required: true })}
+            />
+            {errors.metaInfo && (
+              <span className="text-error">This field is required</span>
+            )}
+          </div>
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">
-              Asset image <span className="text-warning">(optional)</span>
-            </span>
-          </label>
-          <input
-            type="file"
-            className="file-input file-input-bordered w-full max-w-xs"
-            onChange={(event) => {
-              setImageFile(event.target.value);
-            }}
-            // {...register("image")}
-          />
-          {/* errors will return when field validation fails  */}
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text"></span>
-          </label>
-          <input className="btn btn-primary mt-5" type="submit" />
-        </div>
-      </form>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">
+                Asset image <span className="text-warning">(optional)</span>
+              </span>
+            </label>
+            <input
+              type="file"
+              className="file-input file-input-bordered w-full"
+              onChange={(event) => {
+                setImageFile(event.target.value);
+              }}
+              // {...register("image")}
+            />
+            {/* errors will return when field validation fails  */}
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text"></span>
+            </label>
+            <input
+              className="btn btn-primary mt-5"
+              type="submit"
+              value="Create Asset"
+            />
+            {/* {true && <span className="text-success">status: waiting..</span>}
+            {false && <span className="text-error">status: waiting..</span>} */}
+          </div>
+        </form>
+      </div>
+      <div className="">
+        {/* <Tips /> */}
+        <Console />
+      </div>
     </div>
   );
 };

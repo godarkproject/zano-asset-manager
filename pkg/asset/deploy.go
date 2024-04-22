@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func Deploy(walletFile string, password string) (error, []string) {
+func Deploy(stdoutPipe chan string, walletFile string, password string) (error, []string) {
 	var stdoutSlice []string
 
 	cmd := exec.Command("binaries/simplewallet", "--wallet-file", fmt.Sprintf("wallets/%s", walletFile), "--password", password, "--daemon-address", "127.0.0.1:11211", "deploy_new_asset", "tmp/asset.txt", "--no-password-confirmation")
@@ -31,6 +31,7 @@ func Deploy(walletFile string, password string) (error, []string) {
 	scanner := bufio.NewScanner(stdout)
 	for scanner.Scan() {
 		stdoutSlice = append(stdoutSlice, scanner.Text())
+		stdoutPipe <- scanner.Text()
 		//runtime.EventsEmit(ctx, "Stdout", scanner.Text())
 	}
 

@@ -26,6 +26,10 @@ export function EmitAsset(arg1, arg2, arg3, arg4) {
   return window['go']['main']['App']['EmitAsset'](arg1, arg2, arg3, arg4);
 }
 
+export function EmitPipe() {
+  return window['go']['main']['App']['EmitPipe']();
+}
+
 export function LaunchWallet(arg1, arg2) {
   return window['go']['main']['App']['LaunchWallet'](arg1, arg2);
 }

@@ -31,10 +31,6 @@ func JsonFile(ticker string, fullName string, maxSupply uint64, currentSupply ui
 	b, err := json.Marshal(str)
 	if err != nil {
 		fmt.Println("Unable to convert the struct to a JSON string")
-	} else {
-		// convert []byte to a string type and then print
-		//fmt.Println(string(b))
-		log.Println("Asset created")
 	}
 
 	if err := os.WriteFile("tmp/asset.txt", []byte(string(b)), 0666); err != nil {

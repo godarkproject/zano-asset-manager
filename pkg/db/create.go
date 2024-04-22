@@ -27,8 +27,8 @@ func Create(originAddress string, ticker string, fullName string, assetId string
 		CurrentSupply: currentSupply,
 		Decimal:       decimal,
 		MetaInfo:      metaInfo,
-		Image:         image[12:],
-		WalletFile:    wallet[12:],
+		Image:         image,
+		WalletFile:    wallet,
 		Uuid:          newUuid,
 	}
 

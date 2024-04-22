@@ -13,6 +13,8 @@ export function EditAsset(arg1:string,arg2:string,arg3:string,arg4:string):Promi
 
 export function EmitAsset(arg1:string,arg2:string,arg3:string,arg4:string):Promise<boolean>;
 
+export function EmitPipe():Promise<void>;
+
 export function LaunchWallet(arg1:string,arg2:string):Promise<boolean>;
 
 export function WalletStatus():Promise<boolean>;
