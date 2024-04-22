@@ -1,0 +1,5 @@
+package asset
+
+func Emit() {
+
+}
