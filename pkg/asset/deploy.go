@@ -2,12 +2,13 @@ package asset
 
 import (
 	"bufio"
-	"context"
 	"fmt"
 	"os/exec"
 )
 
-func Deploy(ctx context.Context, walletFile string, password string) error {
+func Deploy(walletFile string, password string) (error, []string) {
+	var stdoutSlice []string
+
 	cmd := exec.Command("binaries/simplewallet", "--wallet-file", fmt.Sprintf("wallets/%s", walletFile), "--password", password, "--daemon-address", "127.0.0.1:11211", "deploy_new_asset", "tmp/asset.txt", "--no-password-confirmation")
 
 	// Set the working directory if needed
@@ -19,25 +20,25 @@ func Deploy(ctx context.Context, walletFile string, password string) error {
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Println(err)
+		return err, stdoutSlice
 	}
 
 	// Start the command
 	if err := cmd.Start(); err != nil {
-		return err
+		return err, stdoutSlice
 	}
 
-	Pipe(ctx, "deploy", stdout)
 	scanner := bufio.NewScanner(stdout)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		stdoutSlice = append(stdoutSlice, scanner.Text())
+		//runtime.EventsEmit(ctx, "Stdout", scanner.Text())
 	}
 
 	// Wait for the command to finish (which will never happen for a persistent process)
 	// This is triggered on invalid wallet password
 	if err := cmd.Wait(); err != nil {
-		return err
+		return err, stdoutSlice
 	}
 
-	return nil
+	return nil, stdoutSlice
 }

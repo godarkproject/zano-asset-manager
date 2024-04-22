@@ -1,4 +1,4 @@
-import React from "react";
+import Rackz from "../assets/rackz.png";
 
 export const AssetTable = () => {
   return (
@@ -8,10 +8,10 @@ export const AssetTable = () => {
           {/* head */}
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
+              <th>Asset Name</th>
+              <th>Meta info & ID</th>
+              <th>Supply</th>
+              <th>Decimal</th>
             </tr>
           </thead>
           <tbody>
@@ -20,30 +20,31 @@ export const AssetTable = () => {
               <td>
                 <div className="flex items-center gap-3">
                   <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-2@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+                    <div className="mask mask-squircle w-16 h-16">
+                      <img src={Rackz} alt={`${""}`} />
                     </div>
                   </div>
                   <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                    <div className="text-sm opacity-50">United States</div>
+                    <div className="font-bold">Rackz</div>
+                    <div className="text-sm opacity-50">$RKZ</div>
                   </div>
                 </div>
               </td>
               <td>
-                Zemlak, Daniel and Leannon
+                Meta: Raccoon powered, private MeMe money for the masses.
                 <br />
-                <span className="badge badge-ghost badge-sm">
-                  Desktop Support Technician
+                <span className="badge badge-primary">
+                  ID: 7dkashfksbjcdlksdjfirkw4rjnflksnd
                 </span>
               </td>
-              <td>Purple</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
+              <td>
+                Max: 10000000000000000000000.
+                <br />
+                <span className="badge badge-primary">
+                  Emitted: 7dkashfksbjcdlksdjfirkw4rjnflksnd
+                </span>
+              </td>
+              <th>12</th>
             </tr>
           </tbody>
         </table>

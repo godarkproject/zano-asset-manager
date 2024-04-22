@@ -1,8 +1,16 @@
 import ZanoHub from "../../assets/ca_manager.svg";
 
+import { Link } from "react-router-dom";
+
+// go
+import { DisconnectWallet } from "../../../wailsjs/go/main/App";
+
 export const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 px-5">
+    <div
+      className="navbar bg-base-100 px-5 text-base-content sticky top-0 z-30 flex justify-center bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)] 
+    shadow-sm"
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -21,52 +29,33 @@ export const Navbar = () => {
               />
             </svg>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a>Item 1</a>
-            </li>
-
-            <li>
-              <a>Item 2</a>
-            </li>
-
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
         </div>
         <a className="">
           <img src={ZanoHub} width={65} alt="ZanoHub logo" />
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="grid grid-cols-3 gap-1 menu menu-horizontal px-1">
           <li>
-            <a>Item 1</a>
+            <Link to={"/"}>Assets</Link>
           </li>
           <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
+            <Link to={"/manage"}>Manage</Link>
           </li>
           <li>
-            <a>Item 3</a>
+            <Link to={"/airdrop"}>Airdrop</Link>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Disconnect wallet</a>
+        <a
+          className="btn btn-primary"
+          onClick={() => {
+            DisconnectWallet();
+          }}
+        >
+          Disconnect wallet
+        </a>
       </div>
     </div>
   );

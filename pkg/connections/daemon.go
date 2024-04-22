@@ -1,4 +1,4 @@
-package zano
+package connections
 
 import (
 	"bytes"
@@ -29,7 +29,7 @@ func ZanodConnection() bool {
 	{
 		"jsonrpc": "2.0",
 		"id": 0,
-		"method": "get_all_alias_details"
+		"method": "getblockcount"
 	}`
 	request, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(jsonBody)))
 	if err != nil {

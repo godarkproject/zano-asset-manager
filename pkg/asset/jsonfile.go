@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 )
 
 type JsonStruct struct {
@@ -17,25 +16,14 @@ type JsonStruct struct {
 	MetaInfo      string `json:"meta_info"`
 }
 
-func JsonFile(ticker string, fullName string, maxSupply string, currentSupply string, decimal string, metaInfo string) {
+func JsonFile(ticker string, fullName string, maxSupply uint64, currentSupply uint64, decimal int, metaInfo string) {
 
-	intDecimal, _ := strconv.Atoi(decimal)
-
-	ui64Max, err := strconv.ParseUint(maxSupply, 10, 64)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	ui64Cur, err := strconv.ParseUint(currentSupply, 10, 64)
-	if err != nil {
-		fmt.Println(err)
-	}
 	str := JsonStruct{
 		Ticker:        ticker,
 		FullName:      fullName,
-		MaxSupply:     ui64Max,
-		CurrentSupply: ui64Cur,
-		Decimal:       intDecimal,
+		MaxSupply:     maxSupply,
+		CurrentSupply: currentSupply,
+		Decimal:       decimal,
 		MetaInfo:      metaInfo,
 	}
 

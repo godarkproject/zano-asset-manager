@@ -1,5 +1,10 @@
-import React from "react";
+// components
+import { AssetTable } from "./AssetTable";
 
 export const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <AssetTable />
+    </div>
+  );
 };

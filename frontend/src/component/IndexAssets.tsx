@@ -6,7 +6,7 @@ import { Dashboard } from "./Dashboard";
 
 import { ConnectionsContext } from "../contexts/ConnectionsContext";
 
-export const Index = () => {
+export const IndexAssets = () => {
   const { daemon, wallet } = useContext(ConnectionsContext);
 
   return <>{daemon && wallet ? <Dashboard /> : <WelcomeConnect />}</>;

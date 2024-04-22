@@ -1,4 +1,4 @@
-package zano
+package connections
 
 import (
 	"bytes"
@@ -21,8 +21,14 @@ type GetAddressRes struct {
 	} `json:"result"`
 }
 
-func Simplewallet(jsonBody string) bool {
+func WalletConnection() bool {
 	url := "http://127.0.0.1:11212/json_rpc"
+	jsonBody := `
+		{
+		"jsonrpc": "2.0",
+		"id": 0,
+		"method": "getaddress"
+	}`
 	request, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(jsonBody)))
 	if err != nil {
 		return false // return meaningful statement

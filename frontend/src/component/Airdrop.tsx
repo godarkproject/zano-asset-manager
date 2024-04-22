@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Airdrop = () => {
-  return <div>Airdrop</div>;
+  return <div className="p-5">Airdrop</div>;
 };
